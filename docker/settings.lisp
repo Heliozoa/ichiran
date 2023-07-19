@@ -1,28 +1,6 @@
 (in-package #:ichiran/conn)
 
-(setf postmodern:*default-use-ssl*
-    (let* ((env-ssl (uiop:getenv "ICHIRAN_SSL")))
-        (if env-ssl
-            (cond
-                ((string= env-ssl "no") :no)
-                ((string= env-ssl "try") :try)
-                ((string= env-ssl "require") :require)
-                ((string= env-ssl "yes") :yes)
-                ((string= env-ssl "full") :full)
-                (t (error (format nil "Invalid environment variable ICHIRAN_SSL=~a. Expected no, try, require, yes or full." env-ssl))))
-            :no)))
-
-(defparameter *default-connection* '("jmdict0122" "postgres" "password" "pg"))
-
-(defparameter *connection*
-    (let*
-        ((env-connection
-            (uiop:getenv "ICHIRAN_CONNECTION"))
-        (connection
-            (if env-connection
-                (cl-ppcre:split "\\s+" env-connection)
-                *default-connection*)))
-    connection))
+(defparameter *connection* '("jmdict0122" "postgres" "password" "pg"))
 
 (defparameter *connections* '((:old "jmdict_old" "postgres" "password" "localhost")
                               (:test "jmdict_test" "postgres" "password" "localhost")))
