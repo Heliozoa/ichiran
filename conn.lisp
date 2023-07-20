@@ -38,6 +38,9 @@
     (let ((env-connection (get-ichiran-connection)))
       (if env-connection
           (setf *connection* env-connection)))
+    (let ((env-jmdict-data (get-ichiran-jmdict-data)))
+      (if env-jmdict-data
+          (setf *jmdict-data* env-jmdict-data)))
     (if (and old-connection keep-connection)
         (setf *connection* old-connection)
         (unless (equal old-connection *connection*)
@@ -52,6 +55,9 @@
                 (cl-ppcre:split "\\s+" env-connection)
                 nil)))
     connection))
+
+(defun get-ichiran-jmdict-data ()
+    (uiop:getenv "ICHIRAN_JMDICT_DATA"))
 
 (defun set-ichiran-ssl ()
   (setf postmodern:*default-use-ssl*
