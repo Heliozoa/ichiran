@@ -40,8 +40,7 @@
         do (format t "~%~%* ~a  ~a" word gloss)))
 
 (defun main ()
-  (ichiran/conn::load-connection-from-env)
-  (ichiran/conn::load-ssl-mode-from-env)
+  (load-connection-from-env)
   (multiple-value-bind (options free-args)
       (handler-case
         (handler-bind ((opts:unknown-option #'unknown-option))
