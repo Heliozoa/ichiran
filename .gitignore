@@ -1,5 +1,6 @@
 *.fasl
 *~
+settings.lisp
 !docker/settings.lisp
 ichiran-cli
 ichiran-cli.exe
